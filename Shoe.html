@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXK | Home</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@200;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+  
+    <nav class="navbar g-nav">
+        <div class="logo">TXK</div>
+        <div class="nav-links" id="nav-links">
+            <a href="#">Home</a>
+            <a href="products.html">Products</a>
+
+        </div>
+        <div style="display:flex; align-items:center;">
+            <div class="cart-icon clickable" id="cart-toggle">Cart (<span id="cart-count">0</span>)</div>
+            <div class="hamburger clickable" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+  
+    <div class="cart-sidebar" id="cart-sidebar">
+       
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-btn clickable" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0</span>
+            </div>
+            <button class="btn btn-primary w-100 clickable" id="checkout-btn">Checkout</button>
+        </div>
+    </div>
+    <div class="backdrop" id="cart-backdrop"></div>
+
+  
+
+    <div class="modal" id="quick-view-modal">
+        <div class="modal-content quick-view-content">
+            <button class="close-btn clickable" id="close-quick-view">&times;</button>
+            <div class="quick-view-grid">
+                <div class="qv-image-wrapper">
+                    <img src="" id="qv-img" alt="Product Image">
+                </div>
+                <div class="qv-details">
+                    <h2 id="qv-title">Product Title</h2>
+                    <p class="qv-price" id="qv-price">$0</p>
+                    <p class="qv-desc">Premium minimalist design emphasizing clean lines and supreme comfort.</p>
+                    <div class="size-selector">
+                        <p>Select Size (US):</p>
+                        <div class="size-btns">
+                            <button class="size-btn clickable">8</button>
+                            <button class="size-btn clickable active">9</button>
+                            <button class="size-btn clickable">10</button>
+                            <button class="size-btn clickable">11</button>
+                            <button class="size-btn clickable">12</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100 mt-2 clickable" id="qv-add-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backdrop backdrop-modal" id="qv-backdrop"></div>
+
+    
+
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content checkout-content">
+            <button class="close-btn clickable" id="close-checkout">&times;</button>
+            <div id="checkout-form-container">
+                <h2>Secure Checkout</h2>
+
+                <div class="payment-tabs">
+                    <button class="pay-tab clickable active" data-method="pay-card">Credit Card</button>
+                    <button class="pay-tab clickable" data-method="pay-paypal">PayPal</button>
+                    <button class="pay-tab clickable" data-method="pay-apple">Apple Pay</button>
+                </div>
+
+                <form id="checkout-form">
+                    <div class="form-group"><label>Email Address</label><input type="email" required
+                            placeholder="you@example.com" class="clickable-input"></div>
+                    <div class="form-group"><label>Shipping Address</label><input type="text" required
+                            placeholder="123 street" class="clickable-input"></div>
+
+                    <div id="pay-card" class="pay-method active">
+                        <div class="form-row">
+                            <div class="form-group w-100">
+                                <label>Card Number</label>
+                                <input type="text" placeholder="0000 0000 0000 0000" class="clickable-input">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group w-50">
+                                <label>Expiry</label>
+                                <input type="text" placeholder="MM/YY" class="clickable-input">
+                            </div>
+                            <div class="form-group w-50" style="margin-left: 1rem;">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123" class="clickable-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pay-paypal" class="pay-method">
+                        <p style="margin-bottom:1rem;color:var(--text-light);">You will be redirected to PayPal to
+                            securely log in and authorize payment after clicking Pay.</p>
+                    </div>
+
+                    <div id="pay-apple" class="pay-method">
+                        <p style="margin-bottom:1rem;color:var(--text-light);">Approve the Apple Pay prompt on your
+                            connected Apple device.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mt-2 clickable" id="place-order-btn">Pay <span
+                            id="checkout-total"></span></button>
+                </form>
+            </div>
+            <div id="order-success-container" style="display: none; text-align: center; padding: 2rem 0;">
+                <h2 style="font-size: 3rem; margin-bottom: 0.5rem; color: var(--text-color);">✓</h2>
+                <h2>Payment Successful</h2>
+                <p style="margin-top: 0.5rem; color: var(--text-color); font-weight: 500;" id="order-id-display"></p>
+
+                <div id="order-bill-details"
+                    style="margin: 1.5rem auto; text-align: left; width: 100%; max-width: 400px; padding: 1.5rem; background: #fafafa; border: 1px solid var(--border-color); font-size: 0.9rem; color: #000;">
+              
+                </div>
+
+                <p style="color: var(--text-light); margin-bottom: 2rem;">A copy of your receipt has been emailed.</p>
+                <button class="btn btn-secondary clickable" id="continue-shopping">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+    <div class="backdrop backdrop-modal" id="checkout-backdrop"></div>
+
+ 
+    <main id="main-content">
+       
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title g-hero-title">
+                    <div class="word-wrap"><span class="word">Redefining</span></div>
+                    <div class="word-wrap"><span class="word">Elegance.</span></div>
+                </h1>
+                <p class="hero-subtitle g-fade-up">Discover the new standard of minimalist footwear.</p>
+                <a href="#collection" class="btn btn-primary clickable g-fade-up">Shop Collection</a>
+            </div>
+            <div class="hero-image-wrapper g-hero-img-wrap">
+                <img src="./assets/tkhan_hero.png" alt="Tkhan Premium Sneaker" class="hero-image g-hero-img">
+            </div>
+        </header>
+
+        <div class="marquee-container g-marquee">
+            <div class="marquee-content">
+                <span>TXK PREMIUM</span>
+                <span>MINIMALIST</span>
+                <span>FULL GRAIN</span>
+                <span>TKHAN PREMIUM</span>
+                <span>MINIMALIST</span>
+                <span>FULL GRAIN</span>
+            </div>
+        </div>
+
+        <section id="collection" class="collection">
+
+            <div class="section-header g-header-reveal">
+                <h2>The Showcase</h2>
+                <p>Our best sellers. Every step, a statement.</p>
+            </div>
+
+
+            <div class="grid featured-grid" id="product-grid">
+            
+
+
+            </div>
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="products.html" class="btn btn-secondary clickable g-fade-up">View Full Catalog</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-modern gsap-pin-section">
+            <div class="about-scroll-container">
+                <div class="about-left">
+                    <h2 class="g-about-text">Sole <br>Theory.</h2>
+                    <p class="g-about-text">
+
+                        Precision engineered footwear for the modern landscape. Minimalist construction meets daily
+                        utility. Essential form, uncompromised quality.</p>
+                </div>
+                <div class="about-right">
+                    <img src="./assets/display.png" alt="Craftsmanship" class="g-about-img">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="footer-grid g-fade-up">
+            <div class="footer-brand">
+                <h3>TXK</h3>
+                <p>Premium footwear for the urban explorer.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Shop</h4>
+                <a href="index.html" class="clickable">Home</a>
+                <a href="products.html" class="clickable">All Products</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="#" class="clickable">FAQ</a>
+                <a href="#" class="clickable">Shipping & Returns</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Us</h4>
+                <p style="color: var(--text-light); margin-bottom: 0.5rem; font-size: 0.9rem;">Reach out anytime:</p>
+                <a href="mailto:tabassumtx@gmail.com" class="clickable"
+                    style="text-transform: lowercase; color: var(--text-color); font-weight: 500;">txkshoe@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom"
+            style="text-align: center; color: var(--text-light); font-size: 0.9rem; padding-top: 2rem;">
+            &copy; 2026 TXK Official
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
