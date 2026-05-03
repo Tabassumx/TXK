@@ -54,14 +54,14 @@ Dark mode
 Backend integration
 User login system
 
-##👩‍💻 Creator
+## Creator
 
 Made by *Tabassum*
 
-##Contact
+## Contact
 Email- tabassumtx@gmail.com 
 
-⭐ Live Preview
+## ⭐ Live Preview
 
 Visit here: https://tabassumx.github.io/TXK/
 
